@@ -1,0 +1,17 @@
+{
+  "pluginmetadataversion": 2,
+  "name": "HLIL Dump",
+  "type": ["binaryview"],
+  "api": ["python2", "python3"],
+  "description": "Dumps HLIL code to a directory",
+  "longdescription": "This plugin will dump all the code in a directory of your choice.",
+  "platforms" : ["Darwin", "Linux", "Windows"],
+  "installinstructions" : {
+    "Darwin" : "no special instructions, package manager is recommended",
+    "Linux" : "no special instructions, package manager is recommended",
+    "Windows" : "no special instructions, package manager is recommended"
+  },
+  "version": "1.0",
+  "author": "atxsinn3r",
+  "minimumbinaryninjaversion": 2000
+}
