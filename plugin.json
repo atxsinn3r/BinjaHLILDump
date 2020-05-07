@@ -1,7 +1,7 @@
 {
   "pluginmetadataversion": 2,
   "name": "HLIL Dump",
-  "type": ["binaryview"],
+  "type": ["helper"],
   "api": ["python2", "python3"],
   "description": "Dumps HLIL code to a directory",
   "longdescription": "This plugin will dump all the code in a directory of your choice.",
