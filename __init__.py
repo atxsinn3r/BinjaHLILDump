@@ -5,15 +5,25 @@
 #
 # Author:
 # Wei Chen (atxsinn3r)
+# https://github.com/atxsinn3r/BinjaHLILDump
 #
 
 from binaryninja import *
+import re
+import platform
 
 class HlilDump(BackgroundTaskThread):
   def __init__(self, bv, dest):
     BackgroundTaskThread.__init__(self, 'Dumping HLIL...', True)
     self.bv = bv
     self.dest = dest
+
+  def normalize_path(self, path):
+    if 'Windows' in platform.system():
+      # https://gist.github.com/doctaphred/d01d05291546186941e1b7ddc02034d3
+      return re.sub(r'[><:"/\\|\?\*]', '_', path)
+    else:
+      return re.sub(r'/', '_', path)
 
   def run(self):
     count = 1
@@ -29,7 +39,7 @@ class HlilDump(BackgroundTaskThread):
       print("Dumping function: %s" %(function_name))
       self.progress = "Dumping HLIL: %d/%d" %(count, len(self.bv.functions))
       source = '\n'.join(map(str, function.hlil.root.lines))
-      dest_name = os.path.join(self.dest, function_name)
+      dest_name = os.path.join(self.dest, self.normalize_path(function_name))
       f = open(dest_name, 'w')
       f.write(source)
       f.close()
