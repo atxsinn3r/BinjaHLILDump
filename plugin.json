@@ -15,7 +15,7 @@
     "Linux" : "no special instructions, package manager is recommended",
     "Windows" : "no special instructions, package manager is recommended"
   },
-  "version": "1.0",
+  "version": "1.1",
   "author": "atxsinn3r",
   "minimumbinaryninjaversion": 2096
 }
