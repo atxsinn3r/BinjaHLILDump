@@ -33,7 +33,7 @@ class HlilDump(BackgroundTaskThread):
       symbol = self.bv.get_symbol_at(function.start)
       if hasattr(symbol, 'short_name'):
         func_short_name = symbol.short_name
-        if len(func_short_name) <= 255:
+        if len(self.dest) + len(func_short_name) <= 255:
           function_name = func_short_name
 
       print("Dumping function: %s" %(function_name))
@@ -51,9 +51,8 @@ def dump_hlil(bv, function):
   if dest == None:
     print('No destination directory provided to save the decompiled source')
     return
-  dest = "".join(map(chr, dest))
+  dest = str(dest.decode())
   dump = HlilDump(bv, dest)
   dump.start()
-  pass
 
 PluginCommand.register_for_address('HLIL Dump', 'Dumps HLIL for the whole code base', dump_hlil)
