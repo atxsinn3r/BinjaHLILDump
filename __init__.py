@@ -7,7 +7,6 @@
 # Wei Chen (atxsinn3r)
 # https://github.com/atxsinn3r/BinjaHLILDump
 #
-
 from binaryninja import *
 import re
 import platform
@@ -40,8 +39,8 @@ class HlilDump(BackgroundTaskThread):
       self.progress = "Dumping HLIL: %d/%d" %(count, len(self.bv.functions))
       source = '\n'.join(map(str, function.hlil.root.lines))
       dest_name = os.path.join(self.dest, self.normalize_path(function_name))
-      f = open(dest_name, 'w')
-      f.write(source)
+      f = open(dest_name, 'wb')
+      f.write(bytes(source, 'utf-8'))
       f.close()
       count += 1
     print('Done.')
@@ -51,7 +50,6 @@ def dump_hlil(bv, function):
   if dest == None:
     print('No destination directory provided to save the decompiled source')
     return
-  dest = str(dest.decode())
   dump = HlilDump(bv, dest)
   dump.start()
 
